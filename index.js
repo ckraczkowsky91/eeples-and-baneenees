@@ -16,7 +16,14 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb+srv://dbUser:dbUserPassword@cluster0-ermq3.mongodb.net/test?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true
-});
+  }, function (err, res) {
+      if (err) {
+      console.log (err);
+      } else {
+      console.log ('Succeeded connected to MongoDN');
+      }
+    }
+  );
 
 // use bodyparser so that our requests can be understood by MongoDB
 // otherwise our request will error out
