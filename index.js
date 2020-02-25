@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname)));
 
 // connect our Express application to the database using Mongoose
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb+srv://dbUser:dbUserPassword@cluster0-ermq3.mongodb.net/test?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
   }, function (err, res) {
