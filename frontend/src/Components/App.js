@@ -15,9 +15,9 @@ class App extends Component{
 
 // Once App has been mounted to the virtual DOM, load the data from the API
   componentDidMount(){
-    const url = 'http://localhost:4000/api/items';
+    // const url = process.env.MONGODB_URI;
 // Use axios to make Promise based calls to API
-    axios.get(url)
+    axios.get('/api/items')
       .then((Response) => {
 // Populate the state with the returned data
         this.setState({
