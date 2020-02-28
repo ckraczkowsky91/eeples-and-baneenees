@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 // tell Express where to find static content i.e. HTML files, stylesheets, and images
-app.use(express.static(path.join(__dirname, 'frontend/public')));
+app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 // connect our Express application to the database using Mongoose
 mongoose.Promise = global.Promise;
