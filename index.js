@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import mongoose from 'mongoose';
 import bodyparser from 'body-parser';
+import cors from 'cors';
 import routes from './routes/itemsRoutes';
 
 // initialize express
@@ -20,7 +21,7 @@ mongoose.connect(process.env.MONGODB_URI, {
       if (err) {
       console.log (err);
       } else {
-      console.log ('Succeeded connected to MongoDN');
+      console.log ('Successfully connected to MongoDB!');
       }
     }
   );
@@ -30,11 +31,14 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
+// execute imported cors function
+app.use(cors());
+
 routes(app);
 
 // define the endpoint for our main application
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/frontend/index.html'));
+  res.sendFile(path.join(__dirname + '/frontend/public/index.html'));
 });
 
 app.listen(port, () =>

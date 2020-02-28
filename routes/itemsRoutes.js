@@ -1,7 +1,7 @@
 import { getItems, addNewItem } from '../controllers/itemsControllers';
 
 const routes = (app) => {
-  app.route('/items')
+  app.route('/api/items')
     .get(getItems)
     .post(addNewItem);
 };
