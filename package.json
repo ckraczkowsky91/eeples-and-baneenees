@@ -4,7 +4,8 @@
   "description": "An application with a React.js frontend and a Node.js backend and deployed to Heroku ",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js --exec babel-node -e js"
+    "start": "nodemon ./index.js --exec babel-node -e js",
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
   "author": "Colin Kraczkowsky",
   "license": "ISC",
