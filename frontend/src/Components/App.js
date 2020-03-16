@@ -19,7 +19,7 @@ class App extends Component{
     const url = process.env.MONGODB_URI;
     // Use axios to make Promise based calls to API
     // axios.get('http://localhost:4000/api/items')
-    axios.get('/api/items');
+    axios.get('/api/items')
       .then((Response) => {
     // Populate the state with the data from Response
     // The Response object has many properties including a data property which is an array of the required data
