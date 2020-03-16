@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 // Make a Component holding the list of items from /api/items
 // The Component will get the items from props (i.e. props.items) passed from App
@@ -14,14 +15,30 @@ const GroceryList = (props) => {
     };
   };
 
+  function handleDelete(item) {
+    // Use axios and the endpoint to delete an item
+    // I'll need to pass the id of the item to axios
+    const url = 'http://localhost:4000';
+    axios.delete(url + `/api/item/${item._id}`)
+      .then((response) => {
+        console.log('Response: ' + response)
+        props.updateState();
+      })
+      .catch((error) => {
+        console.log('Error: ' + error)
+      });
+  };
+
   return(
-    <div>
+    <div id="shopping-cart">
       <ul className="collection">
       {props.items.map((item) => (
         <li className="collection-item avatar" key={item._id}>
-          <i className="material-icons">shopping_basket</i>
+          <a id="radioButton" onClick={event => onTap(event)}><i className="small material-icons">radio_button_unchecked</i></a>
           <span className="title" style={{paddingLeft: '20px'}}>{item.itemName}</span>
-          <a id="radioButton" onClick={event => onTap(event)}><i className="small material-icons secondary-content">radio_button_unchecked</i></a>
+          <a className="secondary-content" onClick={handleDelete.bind(this, item)}>
+            <i className="small material-icons">remove_shopping_cart</i>
+          </a>
         </li>
         ))}
       </ul>

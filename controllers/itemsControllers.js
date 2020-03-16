@@ -10,6 +10,7 @@ const Item = mongoose.model('Item', groceryItems);
 // create a POST method controller function to create a new item
 export const addNewItem = (req, res) => {
   let newItem = new Item(req.body);
+  console.log(req.params)
 
   newItem.save((error, Item) => {
     if(error) {
@@ -20,7 +21,7 @@ export const addNewItem = (req, res) => {
   });
 };
 
-// create a GET method controller function to retriece all items
+// create a GET method controller function to retrieve all items
 export const getItems = (req, res) => {
   Item.find((error, Item) => {
     if(error) {
@@ -29,4 +30,9 @@ export const getItems = (req, res) => {
       res.json(Item)
     };
   });
+};
+
+// create a DELETE method controller function to delete a single item
+export const deleteItem = (req, res) => {
+  console.log(req.params);
 };
