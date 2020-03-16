@@ -4,7 +4,9 @@ import { getItems, addNewItem, deleteItem } from '../controllers/itemsController
 const routes = (app) => {
   app.route('/api/items')
     .get(getItems)
-    .post(addNewItem)
+    .post(addNewItem);
+
+  app.route('/api/item/:ItemId')
     .delete(deleteItem);
 };
 
