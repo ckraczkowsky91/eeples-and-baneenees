@@ -16,10 +16,12 @@ class App extends Component{
   };
 
   updateStateHandler = () => {
-    const url = process.env.MONGODB_URI;
     // Use axios to make Promise based calls to API
-    // axios.get('http://localhost:4000/api/items')
-    axios.get('/api/items')
+  /* UNCOMMENT when pushing to Heroku */
+    // const url = process.env.MONGODB_URI;
+    // axios.get('/api/items')
+  /* UNCOMMENT when deploying locally */
+    axios.get('http://localhost:4000/api/items')
       .then((Response) => {
     // Populate the state with the data from Response
     // The Response object has many properties including a data property which is an array of the required data
@@ -41,7 +43,7 @@ class App extends Component{
       <div className="container-fluid">
         <nav>
           <div className="nav-wrapper">
-            <a href="/" className="brand-logo">Grocery List</a>
+            <a href="/" className="brand-logo">Eeeples & Baneenees</a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><a href="#shopping-cart"><i className="medium material-icons">shopping_cart</i></a></li>
               <li><a href="#add-item"><i className="medium material-icons">search</i></a></li>
@@ -49,7 +51,7 @@ class App extends Component{
           </div>
         </nav>
         <GroceryList items={this.state.items} updateState={this.updateStateHandler}/>
-        <GroceryForm />
+        <GroceryForm updateState={this.updateStateHandler}/>
       </div>
     );
   };

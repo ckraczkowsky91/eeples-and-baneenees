@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class GroceryForm extends Component {
+  constructor(props) {
+    super(props);
+  };
 // Define a function to handle submission of the form
   handleSubmit() {
 // The form should add an item using the POST endpoint of the API
@@ -11,10 +14,12 @@ class GroceryForm extends Component {
       itemQuantity: this.refs.quantity.value
     })
     .then((response) => {
-      console.log(response)
+      console.log('submitResponse: ' + response);
+      this.props.updateState();
+      document.getElementById('add-item-form').reset();
     })
     .catch((error) => {
-      console.log(error);
+      console.log('submitError: ' + error);
     });
   };
 
@@ -22,8 +27,8 @@ class GroceryForm extends Component {
   render(){
     return(
       <div id="add-item">
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <h2>What should be added to the grocery list?</h2>
+        <form id="add-item-form" onSubmit={this.handleSubmit.bind(this)}>
+          <h2>Shopping Cart</h2>
           <div>
             <input ref="name" />
             <label>Item</label>

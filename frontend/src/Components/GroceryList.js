@@ -31,10 +31,13 @@ const GroceryList = (props) => {
 
   return(
     <div id="shopping-cart">
+      <h2>Grocery List</h2>
       <ul className="collection">
       {props.items.map((item) => (
         <li className="collection-item avatar" key={item._id}>
-          <a id="radioButton" onClick={event => onTap(event)}><i className="small material-icons">radio_button_unchecked</i></a>
+          <a id="radioButton" onClick={event => onTap(event)}>
+            <i className="small material-icons">radio_button_unchecked</i>
+          </a>
           <span className="title" style={{paddingLeft: '20px'}}>{item.itemName}</span>
           <a className="secondary-content" onClick={handleDelete.bind(this, item)}>
             <i className="small material-icons">remove_shopping_cart</i>
