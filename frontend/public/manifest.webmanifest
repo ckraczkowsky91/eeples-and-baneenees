@@ -1,0 +1,20 @@
+{
+  "name": "Eeeples & Baneenees",
+  "short_name": "Eeeples & Baneenees",
+  "icons": [
+    {
+      "src": "img/e-and-b-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/e-and-b-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "background_color": "#4CC1FC",
+  "display": "standalone",
+  "theme_color": "#222222"
+}
