@@ -6,20 +6,22 @@ class GroceryForm extends Component {
     super(props);
   };
 // Define a function to handle submission of the form
-  handleSubmit() {
+  handleSubmit(event) {
+// Prevents the submission of the form from reloading the page
+    event.preventDefault();
 // The form should add an item using the POST endpoint of the API
 // The items posted will need to follow the model defines in itemsModel.js
   /* UNCOMMENT when deploying locally */
-    // const url = "http://localhost:4000/api/items";
+    const url = "http://localhost:4000/api/items";
   /* UNCOMMENT when pushing to Heroku */
-    const url = "/api/items";
+    // const url = "/api/items";
     axios.post(url, {
       itemName: this.refs.name.value,
       itemQuantity: this.refs.quantity.value
     })
     .then((response) => {
       console.log('submitResponse: ' + response);
-      this.props.updateState();
+      this.props.updateState('submit');
       document.getElementById('add-item-form').reset();
     })
     .catch((error) => {
