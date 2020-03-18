@@ -9,7 +9,11 @@ class GroceryForm extends Component {
   handleSubmit() {
 // The form should add an item using the POST endpoint of the API
 // The items posted will need to follow the model defines in itemsModel.js
-    axios.post("http://localhost:4000/api/items", {
+  /* UNCOMMENT when deploying locally */
+    // const url = "http://localhost:4000/api/items";
+  /* UNCOMMENT when pushing to Heroku */
+    const url = "/api/items";
+    axios.post(url, {
       itemName: this.refs.name.value,
       itemQuantity: this.refs.quantity.value
     })

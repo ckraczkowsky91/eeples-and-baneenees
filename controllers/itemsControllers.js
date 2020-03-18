@@ -10,8 +10,6 @@ const Item = mongoose.model('Item', groceryItems);
 // create a POST method controller function to create a new item
 export const addNewItem = (req, res) => {
   let newItem = new Item(req.body);
-  console.log(req.params)
-
   newItem.save((error, Item) => {
     if(error) {
       res.send(error)

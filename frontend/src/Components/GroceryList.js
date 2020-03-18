@@ -18,10 +18,13 @@ const GroceryList = (props) => {
   function handleDelete(item) {
     // Use axios and the endpoint to delete an item
     // I'll need to pass the id of the item to axios
-    const url = 'http://localhost:4000';
-    axios.delete(url + `/api/item/${item._id}`)
+  /* UNCOMMENT when deploying locally */
+    // const url = 'http://localhost:4000';
+  /* UNCOMMENT when pushing to Heroku */
+    const url = `/api/item/${item._id}`;
+    axios.delete(url)
       .then((response) => {
-        // console.log('Response: ' + response)
+        console.log('Response: ' + response)
         props.updateState();
       })
       .catch((error) => {
