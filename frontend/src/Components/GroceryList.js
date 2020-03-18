@@ -21,7 +21,7 @@ const GroceryList = (props) => {
     const url = 'http://localhost:4000';
     axios.delete(url + `/api/item/${item._id}`)
       .then((response) => {
-        console.log('Response: ' + response)
+        // console.log('Response: ' + response)
         props.updateState();
       })
       .catch((error) => {
