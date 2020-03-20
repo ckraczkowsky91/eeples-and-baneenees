@@ -34,7 +34,7 @@ class GroceryForm extends Component {
     return(
       <div id="add-item">
         <form id="add-item-form" onSubmit={this.handleSubmit.bind(this)}>
-          <h2>Shopping Cart</h2>
+          <h1>Shopping Cart</h1>
           <div>
             <input ref="name" />
             <label>Item</label>
