@@ -8,7 +8,8 @@ export const groceryItems = new schema ({
     type: String,
     required: true
   },
-  itemQuantity: {
-    type: String
+  itemType: {
+    type: String,
+    required: true
   }
 });

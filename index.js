@@ -8,13 +8,14 @@ import routes from './routes/itemsRoutes';
 // initialize express
 const app = express();
 const port = process.env.PORT || 4000;
+const url = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/MERN_app'
 
 // tell Express where to find static content i.e. HTML files, stylesheets, and images
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 // connect our Express application to the database using Mongoose
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true
   }, function (err, res) {
