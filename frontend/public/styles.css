@@ -1,24 +1,4 @@
-h1 {
-  font-size: 35px;
-}
-
-li {
-  display: flex;
-  align-items: center;
-}
-
-a {
-  cursor: pointer;
-}
-
-a.brand-logo, h1 {
-  font-family: 'Shadows Into Light', cursive;
-}
-
-.title {
-  font-family: 'Vollkorn', serif;
-  font-family: 'Crete Round', serif;
-  font-size: 20px !important;
-  padding-left: 20px;
-  text-transform: capitalize;
+body {
+  background-color: #fdfcdc;
+  margin: 0
 }
