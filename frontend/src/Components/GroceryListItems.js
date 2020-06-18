@@ -1,17 +1,23 @@
 import React from 'react';
-import axios from 'axios';
 import {
   Button,
   ButtonGroup,
+  Container,
   IconButton,
   List,
   ListItem,
   ListItemSecondaryAction,
-  ListItemText,
-  Typography
+  ListItemText
 } from '@material-ui/core';
 import { RemoveShoppingCart } from '@material-ui/icons';
 import { withStyles } from '@material-ui/styles';
+
+const StyledButton = withStyles({
+  label: {
+    color: '#878e88',
+    fontFamily: 'Crete Round'
+  }
+})(Button);
 
 const StyledListItemText = withStyles({
   primary: {
@@ -22,7 +28,6 @@ const StyledListItemText = withStyles({
 })(ListItemText);
 
 const GroceryListItems = (props) => {
-
   function onTap(event) {
     var content = event.target.innerHTML;
     if (content === 'radio_button_unchecked'){
@@ -33,11 +38,11 @@ const GroceryListItems = (props) => {
   };
 
   return(
-    <div>
+    <Container>
       <ButtonGroup variant="text" color="primary">
-        <Button onClick={() => props.filterItems(props.items, "all")}>Show All</Button>
-        <Button onClick={() => props.filterItems(props.items, "food")}>Food</Button>
-        <Button onClick={() => props.filterItems(props.items, "dry")}>Dry Goods</Button>
+        <StyledButton onClick={() => props.filterItems(props.items, "all")}>Show All</StyledButton>
+        <StyledButton onClick={() => props.filterItems(props.items, "food")}>Food</StyledButton>
+        <StyledButton onClick={() => props.filterItems(props.items, "dry")}>Dry Goods</StyledButton>
       </ButtonGroup>
       <List>
       {props.items.map((item) => (
@@ -48,13 +53,13 @@ const GroceryListItems = (props) => {
           <StyledListItemText primary={item.itemName} />
           <ListItemSecondaryAction>
             <IconButton onClick={props.handleDelete.bind(null, item)}>
-              <RemoveShoppingCart fontSize="medium"/>
+              <RemoveShoppingCart fontSize="small"/>
             </IconButton>
           </ListItemSecondaryAction>
         </ListItem>
         ))}
       </List>
-    </div>
+    </Container>
   );
 };
 
