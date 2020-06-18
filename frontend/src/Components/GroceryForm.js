@@ -3,9 +3,7 @@ import axios from 'axios';
 import {
   Button,
   Container,
-  FormControl,
   MenuItem,
-  Select,
   SwipeableDrawer,
   TextField,
   Typography
@@ -26,9 +24,18 @@ const StyledHeader = withStyles({
 
 const StyledButton = withStyles({
   root: {
+    backgroundColor: '#7cb744',
+    color: '#f7fff7',
     margin: '8px 0'
   }
 })(Button);
+
+const StyledSwipeableDrawer = withStyles({
+  paper: {
+    margin: 'auto',
+    width: '60%'
+  }
+})(SwipeableDrawer);
 
 const GroceryForm = (props) => {
   const [state, setState] = React.useState({
@@ -51,9 +58,8 @@ const GroceryForm = (props) => {
       itemType: type
     })
     .then((response) => {
-      console.log(response);
       props.updateState('submit');
-      document.getElementById('add-item-form').reset();
+      document.getElementById('item-value').value = "";
     })
     .catch((error) => {
       console.log('submitError: ' + error);
@@ -67,9 +73,10 @@ const GroceryForm = (props) => {
     return(
       <div>
         <Button onClick={() => toggleDrawer('bottom', true)}>
-          <AddShoppingCart fontSize="large"/>
+          <AddShoppingCart style={{color: '#7cb744'}} fontSize="large"/>
         </Button>
-        <SwipeableDrawer anchor='bottom'
+        <StyledSwipeableDrawer
+          anchor='bottom'
           open = {state['bottom']}
           onClose={() => toggleDrawer('bottom', false)}
           onOpen={() => toggleDrawer('bottom', true)}>
@@ -77,7 +84,7 @@ const GroceryForm = (props) => {
           <form onSubmit={handleSubmit}>
             <StyledHeader variant="h1">Shopping Cart</StyledHeader>
             <div>
-              <TextField fullWidth required label="Item" margin="normal" variant="outlined" onChange={(event) => {setItem(event.target.value)}}/>
+              <TextField fullWidth required id="item-value" label="Item" margin="normal" variant="outlined" onChange={(event) => {setItem(event.target.value)}}/>
             </div>
             <div>
               <TextField fullWidth required select label="Type" margin="normal" variant="outlined" onChange={(event) => {setType(event.target.value)}}>
@@ -87,7 +94,6 @@ const GroceryForm = (props) => {
             </div>
             <StyledButton
                variant="contained"
-               color="primary"
                size="large"
                startIcon={<Add/>}
                type="submit"
@@ -96,7 +102,7 @@ const GroceryForm = (props) => {
              </StyledButton>
           </form>
           </Container>
-        </SwipeableDrawer>
+        </StyledSwipeableDrawer>
       </div>
     );
 };
