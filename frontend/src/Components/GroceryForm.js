@@ -1,12 +1,43 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import {
+  Button,
+  Container,
+  FormControl,
+  MenuItem,
+  Select,
+  SwipeableDrawer,
+  TextField,
+  Typography
+} from '@material-ui/core';
+import { Add, AddShoppingCart } from '@material-ui/icons';
+import { withStyles } from '@material-ui/styles';
 
-class GroceryForm extends Component {
-  constructor(props) {
-    super(props);
-  };
+const StyledHeader = withStyles({
+  h1: {
+    color: '#ff6b6b',
+    flexGrow: 1,
+    fontFamily: 'Crete Round',
+    fontSize: '3rem',
+    paddingTop: '15px',
+    paddingBottom: '10px'
+  }
+})(Typography);
+
+const StyledButton = withStyles({
+  root: {
+    margin: '8px 0'
+  }
+})(Button);
+
+const GroceryForm = (props) => {
+  const [state, setState] = React.useState({
+    bottom: false
+  });
+  const [item, setItem] = useState('');
+  const [type, setType] = useState('');
 // Define a function to handle submission of the form
-  handleSubmit(event) {
+  function handleSubmit(event) {
 // Prevents the submission of the form from reloading the page
     event.preventDefault();
 // The form should add an item using the POST endpoint of the API
@@ -16,12 +47,12 @@ class GroceryForm extends Component {
   /* UNCOMMENT when pushing to Heroku */
     const url = "/api/items";
     axios.post(url, {
-      itemName: this.refs.name.value,
-      itemQuantity: this.refs.quantity.value
+      itemName: item,
+      itemType: type
     })
     .then((response) => {
-      console.log('submitResponse: ' + response);
-      this.props.updateState('submit');
+      console.log(response);
+      props.updateState('submit');
       document.getElementById('add-item-form').reset();
     })
     .catch((error) => {
@@ -29,25 +60,45 @@ class GroceryForm extends Component {
     });
   };
 
-// Define what should be rendered by the component
-  render(){
+  const toggleDrawer = (direction, open) => {
+    setState({ ...state, [direction]: open });
+  };
+
     return(
-      <div id="add-item">
-        <form id="add-item-form" onSubmit={this.handleSubmit.bind(this)}>
-          <h1>Shopping Cart</h1>
-          <div>
-            <input ref="name" />
-            <label>Item</label>
-          </div>
-          <div>
-            <input ref="quantity" />
-            <label>Quantity</label>
-          </div>
-          <button className="btn" type="submit">Add</button>
-        </form>
+      <div>
+        <Button onClick={() => toggleDrawer('bottom', true)}>
+          <AddShoppingCart fontSize="large"/>
+        </Button>
+        <SwipeableDrawer anchor='bottom'
+          open = {state['bottom']}
+          onClose={() => toggleDrawer('bottom', false)}
+          onOpen={() => toggleDrawer('bottom', true)}>
+          <Container>
+          <form onSubmit={handleSubmit}>
+            <StyledHeader variant="h1">Shopping Cart</StyledHeader>
+            <div>
+              <TextField fullWidth required label="Item" margin="normal" variant="outlined" onChange={(event) => {setItem(event.target.value)}}/>
+            </div>
+            <div>
+              <TextField fullWidth required select label="Type" margin="normal" variant="outlined" onChange={(event) => {setType(event.target.value)}}>
+                <MenuItem value="food">Food</MenuItem>
+                <MenuItem value="dry good">Dry Good</MenuItem>
+              </TextField>
+            </div>
+            <StyledButton
+               variant="contained"
+               color="primary"
+               size="large"
+               startIcon={<Add/>}
+               type="submit"
+             >
+               Add
+             </StyledButton>
+          </form>
+          </Container>
+        </SwipeableDrawer>
       </div>
     );
-  };
 };
 
 export default GroceryForm;

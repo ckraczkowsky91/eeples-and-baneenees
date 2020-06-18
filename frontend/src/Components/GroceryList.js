@@ -6,6 +6,8 @@ import axios from 'axios';
 // Since props.items is an Array, we can map over it to display all of the data
 
 const GroceryList = (props) => {
+  console.log(props.items);
+
   function onTap(event) {
     var content = event.target.innerHTML;
     if (content === 'radio_button_unchecked'){
@@ -32,20 +34,22 @@ const GroceryList = (props) => {
       });
   };
 
-  function handleMouseOver() {
-    console.log('On the button')
-  }
+  function foodFilter(event){
+    console.log(event.target);
+  };
 
   return(
     <div>
       <h1>Grocery List</h1>
-      <ul className="collection">
+      <a onClick={foodFilter}>Food</a>
+      <ul id="list" className="collection">
       {props.items.map((item) => (
         <li className="collection-item avatar" key={item._id}>
           <a id="radioButton" onClick={event => onTap(event)}>
             <i className="small material-icons">radio_button_unchecked</i>
           </a>
           <span className="title">{item.itemName}</span>
+          <p>{item.itemType}</p>
           <a className="secondary-content" onClick={handleDelete.bind(this, item)}>
             <i id="removeCart" className="small material-icons">remove_shopping_cart</i>
           </a>
