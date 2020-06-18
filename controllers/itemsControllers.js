@@ -34,7 +34,6 @@ export const getItems = (req, res) => {
 export const deleteItem = (req, res) => {
   // use the ItemId returned in the req object to find an instance of Item
   // with the matching _id and delete it
-  console.log(req.params.ItemId);
   Item.deleteOne({ _id: req.params.ItemId }, (error, Item) => {
     if (error){
       res.send(error);
