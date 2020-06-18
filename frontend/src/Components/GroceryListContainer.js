@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Toolbar, Typography } from '@material-ui/core';
+import { Toolbar, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
 import GroceryListItems from './GroceryListItems';
